@@ -1,7 +1,9 @@
 package com.skarpilovich.figuresoop;
 
+import com.skarpilovich.figuresoop.figures.Circle;
 import com.skarpilovich.figuresoop.figures.Figure;
 import com.skarpilovich.figuresoop.figures.Rectangle;
+import com.skarpilovich.figuresoop.figures.Text;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -59,7 +61,6 @@ public class MyApplication extends Application {
             }
         });
 
-
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -68,9 +69,18 @@ public class MyApplication extends Application {
         System.out.println("Mouse released at:");
         System.out.println("x: " + event.getX());
         System.out.println("y: " + event.getY());
-        Rectangle rectangle = new Rectangle(event.getX(),event.getY(), rnd.nextInt(100), rnd.nextInt(100));
-        addFigure(rectangle);
-        repaint();
+        Rectangle rectangle = new Rectangle(event.getX(),event.getY(), 50, rnd.nextInt(100));
+        Circle circle = new Circle(event.getX(), event.getY(),100, 100);
+        Text text = new Text("Hello",event.getX(), event.getY());
+
+                addFigure(circle);
+                repaint();
+                addFigure(rectangle);
+                repaint();
+                addFigure(text);
+                repaint();
+
+
 
     }
 
@@ -88,8 +98,8 @@ public class MyApplication extends Application {
     }
 
     private void repaint() {
-        canvas.getGraphicsContext2D().clearRect(0,0,canvas.getWidth(),canvas.getHeight());
-        for(Figure f : figures) {
+            canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            for (Figure f : figures) {
             f.paint(canvas.getGraphicsContext2D());
         }
     }
